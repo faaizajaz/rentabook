@@ -1,4 +1,5 @@
 from django.db import models
+from libgen_api import LibgenSearch
 
 class BookQuery(models.Model):
 	title = models.CharField(max_length=1000, verbose_name='Title of book')
