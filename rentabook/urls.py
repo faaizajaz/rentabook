@@ -15,7 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from bookquery import views as bq_views
+from users import views as user_views
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', bq_views.SearchView, name="search"),
+    path('register/', user_views.RegisterUser, name="register"),
+    path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
 ]
