@@ -15,22 +15,7 @@ class LibgenSearch:
 		self.search_request = SearchRequest(query, search_type="any")
 		return self.search_request.aggregate_request_data()
 
-	def search_title_filtered(self, query, filters = {	"ID": "",
-														"Author": "", 
-														"Title": "", 
-														"Publisher": "", 
-														"Year": "",
-														"Pages": "",
-														"Language": "",
-														"Size": "",
-														"Extension": "", 
-														"Mirror_1": "",
-														"Mirror_2": "",
-														"Mirror_3": "",
-														"Mirror_4": "",
-														"Mirror_5": "",
-														"Edit": ""	
-														}):
+	def search_title_filtered(self, query, filters):
 		self.search_request = SearchRequest(query, search_type="title")
 		data = self.search_request.aggregate_request_data()
 		
@@ -39,22 +24,7 @@ class LibgenSearch:
 			filtered_data = [d for d in filtered_data if d[f] in filters.values()]
 		return filtered_data
 
-	def search_author_filtered(self, query, filters = {	"ID": "",
-														"Author": "", 
-														"Title": "", 
-														"Publisher": "", 
-														"Year": "",
-														"Pages": "",
-														"Language": "",
-														"Size": "",
-														"Extension": "", 
-														"Mirror_1": "",
-														"Mirror_2": "",
-														"Mirror_3": "",
-														"Mirror_4": "",
-														"Mirror_5": "",
-														"Edit": ""	
-														}):
+	def search_author_filtered(self, query, filters):
 		self.search_request = SearchRequest(query, search_type="author")
 		data = self.search_request.aggregate_request_data()
 		
@@ -63,22 +33,7 @@ class LibgenSearch:
 			filtered_data = [d for d in filtered_data if d[f] in filters.values()]
 		return filtered_data
 		
-	def search_any_filtered(self, query, filters = {	"ID": "",
-														"Author": "", 
-														"Title": "", 
-														"Publisher": "", 
-														"Year": "",
-														"Pages": "",
-														"Language": "",
-														"Size": "",
-														"Extension": "", 
-														"Mirror_1": "",
-														"Mirror_2": "",
-														"Mirror_3": "",
-														"Mirror_4": "",
-														"Mirror_5": "",
-														"Edit": ""	
-														}):
+	def search_any_filtered(self, query, filters):
 		self.search_request = SearchRequest(query, search_type="any")
 		data = self.search_request.aggregate_request_data()
 		
