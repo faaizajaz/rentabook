@@ -9,6 +9,8 @@ def SearchView(request, **kwargs):
 		if form.is_valid():
 			query = form.save()
 			results = query.run_query_any()
+			for i in results:
+				print(f"Title: {i['Title']} by {i['Author']} - URL: {i['Mirror_1']}")
 			
 			# Now redirect to a different page (or use ajax) to display all 
 			# the returned results, and allow user to choose.

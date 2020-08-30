@@ -1,6 +1,9 @@
 from django.db import models
 from libgenapi.libgen_search import LibgenSearch
 
+# Give the query model a results field that holds the dict of results (also includes urls)
+# this is set in the search view
+
 class BookQuery(models.Model):
 	title = models.CharField(max_length=1000, verbose_name='Title of book')
 	author = models.CharField(max_length=1000, verbose_name='Author name')

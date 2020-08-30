@@ -53,5 +53,5 @@ class SearchRequest:
 			for row in information_table.find_all("tr")[1:] # Skip row 0 as it is the headings row
 		]
 
-		output_data = [ dict(zip(self.col_names, row))  for row in raw_data ]
+		output_data = [ dict(zip(self.col_names, row)) for row in raw_data ]
 		return output_data
