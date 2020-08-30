@@ -19,10 +19,10 @@ class BookQuery(models.Model):
 
 	def run_query_author(self):
 		search = LibgenSearch()
-		results = search.search_title(self.author)
+		results = search.search_author(self.author)
 		return results
 
 	def run_query_any(self):
 		search = LibgenSearch()
-		results = search.search_title(self.any_field)
+		results = search.search_any(self.any_field)
 		return results
