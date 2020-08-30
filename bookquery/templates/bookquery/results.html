@@ -1,11 +1,28 @@
-{% load crispy_forms_tags %}
+{% load static %}
 
 <html>
-<body>
+	<head>
+		<link rel="stylesheet" type="text/css" href="{% static 'loader.css' %}" rel="stylesheet">
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="{% static 'download-books.js' %}" type="text/javascript"></script>
+	</head>
+	<body>
 
-{% for book in results %}
-	<h4>{{book.Title}}</h4>
-{% endfor %}
-</body>
+		<form>
+			{% csrf_token %}
+			{% for book in results %}
+				<p><label><input type="checkbox" book-id="{{book.ID}}" name="search-result" download-api="{% url 'download-book-api' book_id=book.ID %}">{{book.Title}}</label></p>
+			{% endfor %}
+			<hr>
+			<button class="download-button" type="submit">Download to kindle</button>
+		</form>
+		<hr>
+
+		<div class="loader-div"></div>
+
+		<h1>DEBUG</h1>
+		{{request.session.search_results}}
+
+	</body>
 </html>
 	
