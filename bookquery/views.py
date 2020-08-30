@@ -15,6 +15,7 @@ from rentabook import settings
 # Create your views here.
 @login_required
 def SearchView(request, **kwargs):
+	print(f"Request made by {request.user.email}")
 	if request.method == 'POST':
 		form = SearchForm(request.POST)
 		if form.is_valid():
@@ -36,6 +37,7 @@ class DownloadView(APIView):
 	permission_classes = (permissions.IsAuthenticated,)
 
 	def post(self, request, book_id=None):
+		print(f"Request made by {request.user.email}")
 		for book in request.session['search_results']:
 			if book["ID"] == book_id:
 				match_book = book
@@ -86,7 +88,7 @@ class DownloadView(APIView):
 		email.attach_file(attachment_path)
 		print(f"Attached {attachment_path}")
 		email.send()
-		print("sent email")
+		print(f"sent email to {request.user.email}")
 
 
 		#Some data to return to your jquery ajax call
