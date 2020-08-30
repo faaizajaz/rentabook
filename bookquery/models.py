@@ -26,3 +26,8 @@ class BookQuery(models.Model):
 		search = LibgenSearch()
 		results = search.search_any(self.any_field)
 		return results
+
+	def run_query_any_epub_or_mobi(self):
+		search = LibgenSearch()
+		results = search.search_any_epub_or_mobi(self.any_field)
+		return results
