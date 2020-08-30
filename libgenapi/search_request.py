@@ -46,7 +46,7 @@ class SearchRequest:
 		# Both the book title and mirror links have a "title" attribute, but only the mirror links have it filled. (title vs title="libgen.io")
 		raw_data = [
 			[
-				td.a['href'] if td.find('a') and td.find('a').has_attr("title") and td.find('a')["title"] is not "" 
+				td.a['href'] if td.find('a') and td.find('a').has_attr("title") and td.find('a')["title"] != "" 
 				else ''.join(td.stripped_strings)
 				for td in row.find_all("td")
 			]
