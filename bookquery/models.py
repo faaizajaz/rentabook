@@ -5,10 +5,11 @@ from libgenapi.libgen_search import LibgenSearch
 # this is set in the search view
 
 class BookQuery(models.Model):
+	search_prompt = "Enter as many keywords about the book as possible"
 	# Search fields
 	title = models.CharField(max_length=1000, verbose_name='Title of book')
 	author = models.CharField(max_length=1000, verbose_name='Author name')
-	any_field = models.CharField(max_length=1000, verbose_name='Wildcard search')
+	any_field = models.CharField(max_length=1000, verbose_name=search_prompt)
 
 	# Fields populated after search
 
@@ -35,3 +36,7 @@ class BookQuery(models.Model):
 		search = LibgenSearch()
 		results = search.search_any_epub_or_mobi(self.any_field)
 		return results
+
+	def get_download_api_url(self, book_id):
+		from django.urls import reverse
+		return reverse('download-book-api', args=book_id)
