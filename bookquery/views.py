@@ -16,6 +16,7 @@ def SearchView(request, **kwargs):
 			
 			# Now redirect to a different page (or use ajax) to display all 
 			# the returned results, and allow user to choose.
+			return render(request, 'bookquery/results.html', {'results': results})
 
 	else:
 		form = SearchForm()
