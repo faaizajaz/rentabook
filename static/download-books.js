@@ -1,7 +1,7 @@
 $(document).ready(function() {
 	$(".download-button").click(function(event) {
 		event.preventDefault();
-		$(".loader-div").html("<div class='loader'></div>");
+		$(".loader-div").html("<span class='loading-text'>Download in progress. Please be patient, this could take up to 5 minutes</span><div class='loader'></div>");
 
 		$.each($("input[name='search-result']:checked"), function(){
 			//alert($(this).attr("book-id"));
