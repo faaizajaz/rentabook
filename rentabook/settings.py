@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
@@ -23,15 +24,11 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'x1jt*^o2md00@cdffsl2=s*x=qfb7_u3o$%ppkw7r*^ypo@ku*'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
-
 
 # Application definition
 
 INSTALLED_APPS = [
+    'whitenoise.runserver_nostatic',
     'bookquery.apps.BookqueryConfig',
     'users.apps.UsersConfig',
     'crispy_forms',
@@ -42,10 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'gunicorn',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -73,21 +72,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'rentabook.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'rentabook',
-        'USER': 'faaiz',
-        'PASSWORD': 'Outpo3t33',
-        'HOST': '',
-        'PORT': '',
-    }
-
-}
 
 
 # Password validation
@@ -137,3 +121,64 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+
+
+
+
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'faaizajaz@gmail.com'
+EMAIL_HOST_PASSWORD = 'njhjwmqceksmegsa'
+EMAIL_USE_SSL = True
+DEFAULT_FROM_EMAIL = 'faaizajaz@gmail.com'
+
+
+### MEDIA FILES ###
+
+#DEPLOY
+MEDIA_ROOT = '/storage'
+
+#DEV
+#MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+### DATABASE ###
+
+#DEPLOY
+DATABASES = {
+    'default': dj_database_url.config()
+}
+
+#DEV
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'rentabook',
+#         'USER': 'faaiz',
+#         'PASSWORD': 'Outpo3t33',
+#         'HOST': '',
+#         'PORT': '',
+#     }
+
+# }
+
+### DEBUG ###
+
+#DEPLOY
+DEBUG = False
+
+#DEV
+#DEBUG = True
+
+### HOSTS ###
+
+#DEPLOY
+ALLOWED_HOSTS = ['.faaiz.org']
+
+#DEV
+#ALLOWED_HOSTS = ['127.0.0.1']
