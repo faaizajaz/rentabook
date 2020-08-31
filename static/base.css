@@ -9,7 +9,7 @@ body {
 
 
 /********************** SEARCH PAGE **********************/
-.search-box {
+.search-box, .login-box {
 	color: black;
 	background: #82c4fa;
 	width: 35%;
@@ -19,7 +19,7 @@ body {
 	font-size: 20px;
 }
 
-#id_any_field {
+#id_any_field, #id_username, #id_password {
 	background: white;
 	width: 100%;
 	padding: 5px 10px;
@@ -28,7 +28,7 @@ body {
 	margin-bottom: 5px;
 }
 
-.search-button {
+.search-button, .login-button {
 	width: 100%;
 	background: #ffbf91;
 	border-radius: 5px;
