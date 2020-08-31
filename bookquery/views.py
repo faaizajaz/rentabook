@@ -19,7 +19,6 @@ def SearchView(request, **kwargs):
 	print(f"Request made by {request.user.username}")
 	if request.method == 'POST':
 		form = SearchForm(request.POST)
-		print(f"Request made by {request.user.username} for {form.cleaned_data.get('any_field')}")
 		if form.is_valid():
 			query = form.save(commit=False)
 			results = query.run_query_any_epub_or_mobi()
