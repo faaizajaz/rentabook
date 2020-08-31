@@ -8,4 +8,4 @@ class SearchForm(ModelForm):
 	#any_field = CharField(required=False)
 	class Meta:
 		model = BookQuery
-		exclude = ['title', 'author']
+		exclude = ['user']

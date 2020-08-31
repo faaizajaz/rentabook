@@ -20,11 +20,12 @@ def SearchView(request, **kwargs):
 	if request.method == 'POST':
 		form = SearchForm(request.POST)
 		if form.is_valid():
-			query = form.save()
+			query = form.save(commit=False)
 			results = query.run_query_any_epub_or_mobi()
 			# Now redirect to a different page (or use ajax) to display all 
 			# the returned results, and allow user to choose.
 			request.session['search_results'] = results
+			query.user = request.user
 			return render(request, 'bookquery/results.html', {'results': results})
 
 	else:
