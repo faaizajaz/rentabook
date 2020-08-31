@@ -16,9 +16,10 @@ import os
 # Create your views here.
 @login_required
 def SearchView(request, **kwargs):
-	print(f"Request made by {request.user.email}")
+	print(f"Request made by {request.user.username}")
 	if request.method == 'POST':
 		form = SearchForm(request.POST)
+		print(f"Request made by {request.user.username} for {form.cleaned_data.get('any_field')}")
 		if form.is_valid():
 			query = form.save(commit=False)
 			results = query.run_query_any_epub_or_mobi()
@@ -26,6 +27,7 @@ def SearchView(request, **kwargs):
 			# the returned results, and allow user to choose.
 			request.session['search_results'] = results
 			query.user = request.user
+			query.save()
 			return render(request, 'bookquery/results.html', {'results': results})
 
 	else:
@@ -39,11 +41,13 @@ class DownloadView(APIView):
 	permission_classes = (permissions.IsAuthenticated,)
 
 	def post(self, request, book_id=None):
-		print(f"Request made by {request.user.email}")
+		
 		for book in request.session['search_results']:
 			if book["ID"] == book_id:
 				match_book = book
 				request.session['match_book'] = match_book
+
+		print(f"{request.user.username} is searching for {match_book['Title']}")
 
 		mirror_1_url = match_book['Mirror_1']
 		mirror_2_url = match_book['Mirror_2']
