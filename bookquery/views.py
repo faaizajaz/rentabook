@@ -10,6 +10,7 @@ from bs4 import BeautifulSoup
 import subprocess
 from django.core.mail import EmailMessage
 from rentabook import settings
+import os
 
 
 # Create your views here.
@@ -57,10 +58,12 @@ class DownloadView(APIView):
 
 		file_title = f"{match_book['Title']}.{match_book['Extension']}"
 		file_mobi_title = f"{match_book['Title']}.mobi"
-		converted_path = f"media/converted/{file_mobi_title}"
+		converted_path = os.path.join(settings.MEDIA_ROOT, f"converted/{file_mobi_title}")
+		#converted_path = f"media/converted/{file_mobi_title}"
 		
 
-		urllib.request.urlretrieve(download_link, f"media/{file_title}")
+		#urllib.request.urlretrieve(download_link, f"media/{file_title}")
+		urllib.request.urlretrieve(download_link, os.path.join(settings.MEDIA_ROOT, file_title))
 
 		print("downloaded book!")
 
@@ -68,15 +71,19 @@ class DownloadView(APIView):
 		converted = False
 		if match_book['Extension'] == "epub":
 			print("it is epub so i'll try to convert")
+			print(settings.MEDIA_ROOT)
+			print(converted_path)
 			try:
-				subprocess.call(["ebook-convert", f"media/{file_title}", converted_path])
+				#subprocess.call(["ebook-convert", f"media/{file_title}", converted_path])
+				subprocess.call(["ebook-convert", os.path.join(settings.MEDIA_ROOT, file_title), converted_path])
 				converted = True
 				attachment_path = converted_path
 				
 			except Exception as e:
 				print(e)
 		else:
-			attachment_path = f"media/{file_title}"
+			#attachment_path = f"media/{file_title}"
+			attachment_path = os.path.join(settings.MEDIA_ROOT, file_title)
 
 		# Now email it
 		subject = f"Emailing: {file_mobi_title}"
