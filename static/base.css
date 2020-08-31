@@ -12,10 +12,11 @@ body {
 .search-box {
 	color: black;
 	background: #82c4fa;
-	width: 400px;
+	width: 500px;
 	margin: 40px auto; /* top/botton 40x, l/r auto. This centers the box */
 	padding: 15px;
 	border-radius: 6px;
+	font-size: 20px;
 }
 
 #id_any_field {
@@ -32,6 +33,14 @@ body {
 	background: #ffbf91;
 	border-radius: 5px;
 	font-size: 20px;
+}
+
+.login-status {
+	text-align: right;
+	width: 100%;
+	margin-bottom: 15px;
+	font-size: 12px;
+	color: #4a4a4a;
 }
 
 /********************** RESULTS PAGE **********************/

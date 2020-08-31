@@ -11,6 +11,7 @@
 
 <body>
 	<div class="search-box">
+		<div class="login-status">Logged in as {{request.user.username}}</div>
 		<form method = "POST">
 			{% csrf_token %}
 			{{ form|crispy }}
