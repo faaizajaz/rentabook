@@ -4,20 +4,24 @@
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" href="{% static 'loader.css' %}" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="{% static 'base.css' %}" rel="stylesheet">
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="{% static 'loader-search.js' %}" type="text/javascript"></script>
 </head>
+
 <body>
-	<form method = "POST">
-		{% csrf_token %}
-		{{ form|crispy }}
-		<div>
-			<button class="search-button" type="submit">
-				Search
-			</button>
-		</div>
-	</form>
-	<div class="loader-div"></div>
+	<div class="search-box">
+		<form method = "POST">
+			{% csrf_token %}
+			{{ form|crispy }}
+			<div>
+				<button class="search-button" type="submit">
+					Search
+				</button>
+			</div>
+		</form>
+		<div class="loader-div"></div>
+	</div>
 </body>
 </html>
 	

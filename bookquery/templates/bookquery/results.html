@@ -3,25 +3,40 @@
 <html>
 	<head>
 		<link rel="stylesheet" type="text/css" href="{% static 'loader.css' %}" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="{% static 'base.css' %}" rel="stylesheet">
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<script src="{% static 'download-books.js' %}" type="text/javascript"></script>
 	</head>
 	<body>
-
-		<form>
-			{% csrf_token %}
-			{% for book in results %}
-				<p><label><input type="checkbox" book-id="{{book.ID}}" name="search-result" download-api="{% url 'download-book-api' book_id=book.ID %}">{{book.Title}}</label></p>
-			{% endfor %}
-			<hr>
-			<button class="download-button" type="submit">Download to kindle</button>
-		</form>
-		<hr>
+		<div class="results-box">
+			<form>
+				{% csrf_token %}
+				<table class="results-table">
+					<tr>
+						<th></th>
+						<th>Title</th>
+						<th>Author</th>
+						<th>Publisher</th>
+						<th>Year</th>
+						<th>Size</th>
+					</tr>
+					
+					{% for book in results %}
+					<tr>
+						<td><label><input type="checkbox" book-id="{{book.ID}}" name="search-result" download-api="{% url 'download-book-api' book_id=book.ID %}"></label></td>
+						<td>{{book.Title}}</td>
+						<td>{{book.Author}}</td>
+						<td>{{book.Publisher}}</td>
+						<td>{{book.Year}}</td>
+						<td>{{book.Size}}</td>
+					</tr>
+					{% endfor %}				
+				</table>
+				<button class="download-button" type="submit">Download selected to {{request.user.username}}'s kindle at {{request.user.email}}</button>
+			</form>
+		</div>
 
 		<div class="loader-div"></div>
-
-		<h1>DEBUG</h1>
-		{{request.session.search_results}}
 
 	</body>
 </html>
