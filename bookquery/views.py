@@ -71,8 +71,6 @@ class DownloadView(APIView):
 		converted = False
 		if match_book['Extension'] == "epub":
 			print("it is epub so i'll try to convert")
-			print(settings.MEDIA_ROOT)
-			print(converted_path)
 			try:
 				print("Converting...")
 				#subprocess.call(["ebook-convert", f"media/{file_title}", converted_path])
