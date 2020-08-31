@@ -74,10 +74,13 @@ class DownloadView(APIView):
 			print(settings.MEDIA_ROOT)
 			print(converted_path)
 			try:
+				print("Converting...")
 				#subprocess.call(["ebook-convert", f"media/{file_title}", converted_path])
 				subprocess.call(["ebook-convert", os.path.join(settings.MEDIA_ROOT, file_title), converted_path])
 				converted = True
 				attachment_path = converted_path
+				print("Successfully converted!")
+
 				
 			except Exception as e:
 				print(e)

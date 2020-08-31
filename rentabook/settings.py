@@ -124,61 +124,56 @@ STATICFILES_DIRS = [
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-
-
-
-
-
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 465
-EMAIL_HOST_USER = 'faaizajaz@gmail.com'
-EMAIL_HOST_PASSWORD = 'njhjwmqceksmegsa'
+EMAIL_HOST_USER = 'rentsbooks@gmail.com'
+EMAIL_HOST_PASSWORD = 'pjztfsxfrndaysci'
 EMAIL_USE_SSL = True
-DEFAULT_FROM_EMAIL = 'faaizajaz@gmail.com'
+DEFAULT_FROM_EMAIL = 'rentsbooks@gmail.com'
 
 
 ### MEDIA FILES ###
 
 #DEPLOY
-MEDIA_ROOT = '/storage'
+# MEDIA_ROOT = '/storage'
 
 #DEV
-#MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 ### DATABASE ###
 
 #DEPLOY
-DATABASES = {
-    'default': dj_database_url.config()
-}
+# DATABASES = {
+#     'default': dj_database_url.config()
+# }
 
 #DEV
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'rentabook',
-#         'USER': 'faaiz',
-#         'PASSWORD': 'Outpo3t33',
-#         'HOST': '',
-#         'PORT': '',
-#     }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'rentabook',
+        'USER': 'faaiz',
+        'PASSWORD': 'Outpo3t33',
+        'HOST': '',
+        'PORT': '',
+    }
 
-# }
+}
 
 ### DEBUG ###
 
-#DEPLOY
-DEBUG = False
+# #DEPLOY
+# DEBUG = False
 
 #DEV
-#DEBUG = True
+DEBUG = True
 
 ### HOSTS ###
 
 #DEPLOY
-ALLOWED_HOSTS = ['.faaiz.org']
+# ALLOWED_HOSTS = ['.faaiz.org']
 
 #DEV
-#ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1']
