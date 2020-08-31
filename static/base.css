@@ -12,8 +12,8 @@ body {
 .search-box {
 	color: black;
 	background: #82c4fa;
-	width: 500px;
-	margin: 40px auto; /* top/botton 40x, l/r auto. This centers the box */
+	width: 35%;
+	margin: 250px auto; /* top/botton 40x, l/r auto. This centers the box */
 	padding: 15px;
 	border-radius: 6px;
 	font-size: 20px;
@@ -43,11 +43,12 @@ body {
 	color: #4a4a4a;
 }
 
+
 /********************** RESULTS PAGE **********************/
 
 .results-box {
 	background: #82c4fa;
-	width: 90%;
+	width: 80%;
 	margin: 40px auto; /* top/botton 40x, l/r auto. This centers the box */
 	padding: 15px;
 	border-radius: 6px;
@@ -81,3 +82,41 @@ input[type='checkbox'] {
 }
 
 
+/********************** LOADER **********************/
+
+.loader {
+  border: 3px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 3px solid #ffbf91;
+  width: 15px;
+  height: 15px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loader-div {
+	margin: 5px auto;
+}
+
+.loader {
+	margin-right: 5px;
+	margin-left: auto;
+}
+
+.loading-text {
+	padding-top: 3px;
+	font-size: 16px;
+	color: #4a4a4a;
+	float: left;
+}
