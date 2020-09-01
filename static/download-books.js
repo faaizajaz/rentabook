@@ -18,8 +18,10 @@ $(document).ready(function() {
                 dataType: 'json',
                 success: function(data) {
                     //alert(data['Title']);
-                    $(".loader-div").html("<h1>Success! " + data['Title'] + " was downloaded");
-
+                    $(".loader-div").html("<span class='loading-text'>Success! " + data['Title'] + " was downloaded.</span>");
+                },
+                error: function(data) {
+                    $(".loader-div").html("<span class='loading-text'>Something went wrong. Check your kindle if you have been waiting for a while.</span>");
                 }
             })
         });
