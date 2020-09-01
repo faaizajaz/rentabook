@@ -17,7 +17,6 @@
                     <th></th>
                     <th>Title</th>
                     <th>Author</th>
-                    <th>Publisher</th>
                     <th>Year</th>
                     <th>Size</th>
                 </tr>
@@ -26,7 +25,6 @@
                     <td><label><input type="checkbox" book-id="{{book.ID}}" name="search-result" download-api="{% url 'download-book-api' book_id=book.ID %}"></label></td>
                     <td>{{book.Title}}</td>
                     <td>{{book.Author}}</td>
-                    <td>{{book.Publisher}}</td>
                     <td>{{book.Year}}</td>
                     <td>{{book.Size}}</td>
                 </tr>
