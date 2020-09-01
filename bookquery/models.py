@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 # this is set in the search view
 
 class BookQuery(models.Model):
-	search_prompt = "Enter as many keywords about the book as possible"
+	search_prompt = "Search for title, author, or both."
 	# Search fields
 	any_field = models.CharField(max_length=1000, verbose_name=search_prompt)
 	user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
