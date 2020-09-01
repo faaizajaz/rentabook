@@ -1,6 +1,6 @@
 /****************** BASE CSS (ALL PAGES) ******************/
 * {
-    font-family: Roboto;
+    font-family: Lato;
 }
 
 body {
@@ -24,6 +24,18 @@ a:hover {
 
 
 /********************** SEARCH PAGE **********************/
+
+.requiredField, #div_id_email .control-label {
+    font-size: 28px;
+}
+
+.help-block, .controls ul {
+    font-size: 16px;
+    margin-top: 0px;
+    color: #a6a6a6;
+}
+
+
 .search-box,
 .login-box,
 .register-box {
@@ -45,14 +57,22 @@ a:hover {
 #id_password2 {
     background: white;
     width: 100%;
-    height: 40px;
-    font-size: 18px;
+    height: 50px;
+    font-size: 24px;
     padding: 5px 10px;
     border-radius: 5px;
     margin-top: 5px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
+#div_id_any_field .control-label .asteriskField {
+    color: #212C3E;
+}
+
+
+#hint_id_password1 {
+    margin: 0px;
+}
 .search-button,
 .login-button,
 .register-button {
@@ -89,7 +109,7 @@ form {
     width: 70%;
     margin: 40px auto;
     /* top/botton 40x, l/r auto. This centers the box */
-    padding: 15px;
+    padding: 15px 30px;
     border-radius: 6px;
     color: white;
 }
