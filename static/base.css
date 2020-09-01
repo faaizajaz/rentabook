@@ -7,18 +7,33 @@ body {
     background: #f0f0f0;
 }
 
+/* unvisited link */
+a:link {
+  color: #8fd4ff;
+}
+
+/* visited link */
+a:visited {
+  color: #8fd4ff;
+}
+
+/* mouse over link */
+a:hover {
+  color: hotpink;
+}
+
 
 /********************** SEARCH PAGE **********************/
 .search-box,
 .login-box,
 .register-box {
-    color: black;
-    background: #82c4fa;
+    color: white;
+    background: #212C3E;
     width: 35%;
     margin: 250px auto;
     /* top/botton 40x, l/r auto. This centers the box */
     padding: 15px;
-    border-radius: 6px;
+    border-radius: 10px;
     font-size: 20px;
 }
 
@@ -30,19 +45,28 @@ body {
 #id_password2 {
     background: white;
     width: 100%;
+    height: 40px;
+    font-size: 18px;
     padding: 5px 10px;
     border-radius: 5px;
     margin-top: 5px;
-    margin-bottom: 5px;
+    margin-bottom: 15px;
 }
 
 .search-button,
 .login-button,
 .register-button {
     width: 100%;
-    background: #ffbf91;
+    height: 50px;
+    background: #FFC26A;
     border-radius: 5px;
     font-size: 20px;
+}
+
+.search-button:hover,
+.login-button:hover,
+.register-button:hover {
+	background: #FFAE49;
 }
 
 .login-status {
@@ -50,26 +74,42 @@ body {
     width: 100%;
     margin-bottom: 15px;
     font-size: 12px;
-    color: #4a4a4a;
+    color: #dedede;
 }
 
 
 /********************** RESULTS PAGE **********************/
 
 .results-box {
-    background: #82c4fa;
+    background: #212C3E;
     width: 80%;
     margin: 40px auto;
     /* top/botton 40x, l/r auto. This centers the box */
     padding: 15px;
     border-radius: 6px;
+    color: white;
+}
+
+.results-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 10px;
+}
+
+.results-table tr:hover {
+    background: #ba7d25;
+    color: black;
+}
+
+.results-table td {
+    border: 1px solid #eee;
 }
 
 .results-table,
 th,
 td {
-    border: 1px solid black;
     font-size: 20px;
+    color: white;
 }
 
 th,
@@ -78,6 +118,16 @@ td {
     padding-right: 10px;
     padding-top: 5px;
     padding-bottom: 5px;
+    color: white;
+}
+
+tr:nth-child(even) {
+	background-color: #415370;
+}
+
+th {
+	background-color: #FFC26A;
+	color: black;
 }
 
 input[type='checkbox'] {
@@ -88,22 +138,27 @@ input[type='checkbox'] {
 
 .download-button {
     width: 100%;
-    background: #ffbf91;
+    background: #FFC26A;
     border-radius: 5px;
     font-size: 20px;
     margin-top: 20px;
     margin-right: auto;
     margin-left: auto;
     padding: 20px;
+    font-weight: bold;
+}
+
+.download-button:hover {
+	background: #FFAE49;
 }
 
 
 /********************** LOADER **********************/
 
 .loader {
-    border: 3px solid #f3f3f3;
+    border: 5px solid #f3f3f3;
     border-radius: 50%;
-    border-top: 3px solid #ffbf91;
+    border-top: 5px solid #FFC26A;
     width: 15px;
     height: 15px;
     -webkit-animation: spin 2s linear infinite;
@@ -144,6 +199,6 @@ input[type='checkbox'] {
 .loading-text {
     padding-top: 3px;
     font-size: 16px;
-    color: #4a4a4a;
+    color: #dedede;
     float: left;
 }
