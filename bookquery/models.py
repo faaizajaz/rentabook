@@ -20,21 +20,6 @@ class BookQuery(models.Model):
 		except AttributeError:
 			return(f"'{self.any_field}' by unknown user")
 
-	def run_query_title(self):
-		search = LibgenSearch()
-		results = search.search_title(self.title)
-		return results
-
-	def run_query_author(self):
-		search = LibgenSearch()
-		results = search.search_author(self.author)
-		return results
-
-	def run_query_any(self):
-		search = LibgenSearch()
-		results = search.search_any(self.any_field)
-		return results
-
 	def run_query_any_epub_or_mobi(self):
 		search = LibgenSearch()
 		results = search.search_any_epub_or_mobi(self.any_field)

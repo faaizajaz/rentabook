@@ -1,13 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
 
-# WHY
-# this SearchRequest module is used to contain all of the internal logic that end users will not need to use. 
-# Therefore the logic is contained and users can interact with libgen_search without extra junk for logic. 
-
-# USAGE
-# req = search_request.SearchRequest("[QUERY]", search_type="[title]")
-
 class SearchRequest:
 
 	col_names = ["ID", "Author", "Title", "Publisher", "Year", "Pages", "Language", "Size", "Extension", 
