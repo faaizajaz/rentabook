@@ -2,7 +2,7 @@
 ![alt text](https://i.imgur.com/NFDN47M.png)
 ![alt text](https://i.imgur.com/RjI2fKn.png)
 ![alt text](https://i.imgur.com/7INfCFq.png)
-![alt text](https://i.imgur.com/UxCo5xQ.png)
+
 
 ## What is it?
 A hastily written Django application that allows users to look up public domain and FOSS books on Libgen (libgen.is) and convert (if necessary) and download directly to a Kindle e-reader. It was designed to be easy to use for parents, grandparents, and other technology challenged family and friends, so functionality is kept deliberately lean.
