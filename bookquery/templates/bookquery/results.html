@@ -8,12 +8,12 @@
     <link rel="stylesheet" type="text/css" href="{% static 'base.css' %}" rel="stylesheet">
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{% static 'download-books.js' %}" type="text/javascript"></script>
-    <<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
 </head>
 
 <body>
     <div class="results-box">
-        <div class="login-status">&#128994 Logged in as {{request.user.username}}</div>
+        <div class="login-status"><span class="login-indicator">&#11044</span> Logged in as {{request.user.username}}</div>
     	<h1>These are the books I've found. Select <b>one</b> to download, or <a class="search-again-link" href="{% url 'search' %}">search again.</a></h1>
         <form>
             {% csrf_token %}
