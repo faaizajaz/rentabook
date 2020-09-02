@@ -17,6 +17,14 @@ import dj_database_url
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 
+
+# Quick-start development settings - unsuitable for production
+# See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
+
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = 'x1jt*^o2md00@cdffsl2=s*x=qfb7_u3o$%ppkw7r*^ypo@ku*'
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -102,6 +110,10 @@ USE_L10N = True
 
 USE_TZ = True
 
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/3.1/howto/static-files/
+
 STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
@@ -112,10 +124,23 @@ STATICFILES_DIRS = [
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'rentsbooks@gmail.com'
+EMAIL_HOST_PASSWORD = 'pjztfsxfrndaysci'
+EMAIL_USE_SSL = True
+DEFAULT_FROM_EMAIL = 'rentsbooks@gmail.com'
+
+
 ### MEDIA FILES ###
 
 #DEPLOY
 MEDIA_ROOT = '/storage'
+
+#DEV
+#MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 
 ### DATABASE ###
 
@@ -124,26 +149,31 @@ DATABASES = {
     'default': dj_database_url.config()
 }
 
+#DEV
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'rentabook',
+#         'USER': 'faaiz',
+#         'PASSWORD': 'Outpo3t33',
+#         'HOST': '',
+#         'PORT': '',
+#     }
 
-####################
-### USER CONFIGS ###
-####################
-
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = '' # e.g. smtp.gmail.com
-EMAIL_PORT = 465 # this is the SSL port for gmail. Change accordingly
-EMAIL_HOST_USER = '' # email address to send from
-EMAIL_HOST_PASSWORD = '' #password for email address
-EMAIL_USE_SSL = True # Can also use TLS
-DEFAULT_FROM_EMAIL = '' # same as EMAIL_HOST_USER
+# }
 
 ### DEBUG ###
 
-# DEPLOY
+# #DEPLOY
 DEBUG = False
 
+#DEV
+#DEBUG = True
 
 ### HOSTS ###
 
+#DEPLOY
+ALLOWED_HOSTS = ['.faaiz.org']
+
 #DEV
-ALLOWED_HOSTS = [''] # e.g. the domain you'll be hosting on
+#ALLOWED_HOSTS = ['127.0.0.1']
