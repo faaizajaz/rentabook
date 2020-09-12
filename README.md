@@ -21,15 +21,62 @@ Whitenoise is already configured to serve static files locally and in deployment
 ### Deploy on a VPS using Dokku
 First set up a a basic VPS (I use Vultr, you can use [my affiliate link](https://www.vultr.com/?ref=7551767) or not) and install Dokku. Follow the instructions [here](http://dokku.viewdocs.io/dokku/getting-started/installation/) to get started.
 #### On your server
-* Install Dokku and create app on server
-* Set up a DB
-  * Install the Dokku postgres plugin from [here](https://github.com/dokku/dokku-postgres)
-  * Create a new postgres db
-  * link that with your app
-* Set up persistent storage. The included `nginx.conf.sigil` will link `/media` in the app container to `/var/lib/dokku/storage/rentabook` on the host machine. You need to create this folder on the source machine, and add a `/converted` folder inside. The `dokku` user should have permissions to read and write.
+##### Install Dokku
+SSH into your server and do:
+`$ wget https://raw.githubusercontent.com/dokku/dokku/v0.21.4/bootstrap.sh`
+`$ sudo DOKKU_TAG=v0.21.4 bash bootstrap.sh`
+
+In a browser, go to the ip address of your server and paste your SSH public key into the box. Check the Dokku docs for more details. You can also ad your public key manually by uploading to the server, and then add the keys to dokku by doing:
+`$ sudo dokku ssh-keys:add <name_for_key> /path/to/key`
+
+Check to see that your key was added by doing:
+`$ dokku ssh-keys:list`
+
+Then, allow the Dokku user to log in via SSH (you need to do this if you have disabled password based login and added an `AllowUser` setting in your `sshd_config`
+
+##### Create a Dokku app and Postgres database
+`$ doku apps:create <your_app>`
+
+Install the Postgres plugin
+`$ sudo dokku plugin:install https://github.com/dokku/dokku-postgres.git`
+
+Create a DB and link to your app
+`dokku postgres:create <db_name>`
+`dokku postgres:link <db_name> <your_app>`
+
+##### Configure your domains and add git repo
+Check the dokku docs for more details on domains. For this purpose, I assume you are deploying to `subdomain.domain.tld`
+`$ dokku domains:add <your_app> subdomain.domain.tld`
+
+Add your repo from your local development machine 
+`> git remote add dokku dokku@<host>:<your_app>`
+
+Make sure to add your domain to `ALLOWED_HOSTS` in `settings.py`
+
+##### Set up persistent storage
+Dokku's default mount point inside the ontainer is `/storage`. You should have no reason to change this, but if you do, refer to the Dokku docs.
+
+On your server, create a folder for your app's storage:
+`$ mkdir -p /var/lib/dokku/data/storage/<your_app>`
+
+Then, set permissions so Dokku and your container have access (32767 is the default container group here):
+`$ sudo chown -R dokku:dokku /var/lib/dokku/data/storage/<your_app>`
+`$ sudo chown -R 32767:32767 /var/lib/dokku/data/storage/<your_app>`
+
+Then, mount your storage to the `/storage` folder in your container:
+`$ dokku storage: mount <appname> /var/lib/dokku/data/storage/<your_app>:/storage`
+
+Check that it is mounted correctly, then restart
+`$ dokku storage:list <your_app>`
+`$ dokku ps:rebuild <your_app>`
+
+Now, the storage folder will remain mounted unless you destroy and redeploy your server
+
+##### Configure Nginx to serve files from the mounted storage
+If you use the step above to configure your persistent storage and use the default static files and media files in the included `settings.py`, then this will already be done for you through the `ngingx.conf.sigil` so you do not need to do anything else.
 
 #### On your local machine
-* Clone the repo
+* Clone this repo
 * Update the `settings.py`
   * Add secret key
   * Configure SMTP
@@ -37,6 +84,11 @@ First set up a a basic VPS (I use Vultr, you can use [my affiliate link](https:/
   
 #### Push to server
 Follow the Dokku [docs](http://dokku.viewdocs.io/dokku/) to complete the deployment.
+
+You should just be able to do (from the root of the cloned repo on your local machine):
+`> git push dokku master:master`
+
+This assumes that you are deploying the `master` branch of the cloned repo (there is only one branch, so this will be default unless you add a branch.
 
 #### Create a Django admin superuser
 You can do this by using the the `dokku run` command (`dokku run rentabook manage.py createsuperuser`) on your server
