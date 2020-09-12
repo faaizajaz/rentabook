@@ -23,33 +23,42 @@ First set up a a basic VPS (I use Vultr, you can use [my affiliate link](https:/
 #### On your server
 ##### Install Dokku
 SSH into your server and do:
-`$ wget https://raw.githubusercontent.com/dokku/dokku/v0.21.4/bootstrap.sh`
-`$ sudo DOKKU_TAG=v0.21.4 bash bootstrap.sh`
+
+    $ wget https://raw.githubusercontent.com/dokku/dokku/v0.21.4/bootstrap.sh
+    $ sudo DOKKU_TAG=v0.21.4 bash bootstrap.sh
 
 In a browser, go to the ip address of your server and paste your SSH public key into the box. Check the Dokku docs for more details. You can also ad your public key manually by uploading to the server, and then add the keys to dokku by doing:
-`$ sudo dokku ssh-keys:add <name_for_key> /path/to/key`
+
+    $ sudo dokku ssh-keys:add <name_for_key> /path/to/key
 
 Check to see that your key was added by doing:
-`$ dokku ssh-keys:list`
+    
+    $ dokku ssh-keys:list
 
 Then, allow the Dokku user to log in via SSH (you need to do this if you have disabled password based login and added an `AllowUser` setting in your `sshd_config`
 
 ##### Create a Dokku app and Postgres database
-`$ doku apps:create <your_app>`
+Create the app 
+
+    $ doku apps:create <your_app>
 
 Install the Postgres plugin
-`$ sudo dokku plugin:install https://github.com/dokku/dokku-postgres.git`
+
+    $ sudo dokku plugin:install https://github.com/dokku/dokku-postgres.git
 
 Create a DB and link to your app
-`dokku postgres:create <db_name>`
-`dokku postgres:link <db_name> <your_app>`
+
+    dokku postgres:create <db_name>
+    dokku postgres:link <db_name> <your_app>
 
 ##### Configure your domains and add git repo
 Check the dokku docs for more details on domains. For this purpose, I assume you are deploying to `subdomain.domain.tld`
-`$ dokku domains:add <your_app> subdomain.domain.tld`
+
+    $ dokku domains:add <your_app> subdomain.domain.tld
 
 Add your repo from your local development machine 
-`> git remote add dokku dokku@<host>:<your_app>`
+
+    > git remote add dokku dokku@<host>:<your_app>
 
 Make sure to add your domain to `ALLOWED_HOSTS` in `settings.py`
 
@@ -57,18 +66,22 @@ Make sure to add your domain to `ALLOWED_HOSTS` in `settings.py`
 Dokku's default mount point inside the ontainer is `/storage`. You should have no reason to change this, but if you do, refer to the Dokku docs.
 
 On your server, create a folder for your app's storage:
-`$ mkdir -p /var/lib/dokku/data/storage/<your_app>`
+
+    $ mkdir -p /var/lib/dokku/data/storage/<your_app>
 
 Then, set permissions so Dokku and your container have access (32767 is the default container group here):
-`$ sudo chown -R dokku:dokku /var/lib/dokku/data/storage/<your_app>`
-`$ sudo chown -R 32767:32767 /var/lib/dokku/data/storage/<your_app>`
+
+    $ sudo chown -R dokku:dokku /var/lib/dokku/data/storage/<your_app>
+    $ sudo chown -R 32767:32767 /var/lib/dokku/data/storage/<your_app>
 
 Then, mount your storage to the `/storage` folder in your container:
-`$ dokku storage: mount <appname> /var/lib/dokku/data/storage/<your_app>:/storage`
+
+    $ dokku storage: mount <appname> /var/lib/dokku/data/storage/<your_app>:/storage
 
 Check that it is mounted correctly, then restart
-`$ dokku storage:list <your_app>`
-`$ dokku ps:rebuild <your_app>`
+
+    $ dokku storage:list <your_app>
+    $ dokku ps:rebuild <your_app>
 
 Now, the storage folder will remain mounted unless you destroy and redeploy your server
 
@@ -86,7 +99,8 @@ If you use the step above to configure your persistent storage and use the defau
 Follow the Dokku [docs](http://dokku.viewdocs.io/dokku/) to complete the deployment.
 
 You should just be able to do (from the root of the cloned repo on your local machine):
-`> git push dokku master:master`
+
+    > git push dokku master:master
 
 This assumes that you are deploying the `master` branch of the cloned repo (there is only one branch, so this will be default unless you add a branch.
 
